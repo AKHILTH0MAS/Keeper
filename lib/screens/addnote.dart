@@ -51,8 +51,8 @@ class _AddNoteState extends State<AddNote> {
         actions: [
           IconButton(
               onPressed: () {
-                Provider.of<NotesProvider>(context, listen: false).addnote(
-                    titlecontroller.text, descriptioncontroller.text, "");
+                Provider.of<NotesProvider>(context, listen: false)
+                    .addnote(titlecontroller.text, descriptioncontroller.text);
                 Navigator.pop(context);
               },
               icon: const Icon(Icons.save))

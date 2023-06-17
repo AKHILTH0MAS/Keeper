@@ -17,6 +17,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final titles = Provider.of<NotesProvider>(context).titles;
+    final descriptions = Provider.of<NotesProvider>(context).descriptions;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -65,7 +67,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               const Searchbar(),
               const SizedBox(height: 10),
-              if (Provider.of<NotesProvider>(context).title.isEmpty)
+              if (titles.isEmpty)
                 const Center(
                   child: Text(
                     'No Notes',
@@ -81,15 +83,10 @@ class _HomePageState extends State<HomePage> {
                   shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
-                  itemCount: int.parse(Provider.of<NotesProvider>(context)
-                      .title
-                      .length
-                      .toString()),
+                  itemCount: titles.length,
                   itemBuilder: (BuildContext context, int index) {
                     return NotesMini(
-                        title: Provider.of<NotesProvider>(context).title[index],
-                        description: Provider.of<NotesProvider>(context)
-                            .description[index]);
+                        title: titles[index], description: descriptions[index]);
                   },
                 ),
             ],

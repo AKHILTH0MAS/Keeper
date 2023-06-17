@@ -28,7 +28,6 @@ class AddNoteButton extends StatelessWidget {
         Provider.of<NotesProvider>(context, listen: false).addnote(
           titlecontroller.text,
           descriptioncontroller.text,
-          "",
         );
         Navigator.pop(context);
       },

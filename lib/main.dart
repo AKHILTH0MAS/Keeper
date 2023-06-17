@@ -3,9 +3,11 @@ import 'package:notes/screens/addnote.dart';
 import 'package:notes/screens/home.dart';
 import 'package:provider/provider.dart';
 import 'components/notesprovider.dart';
+import 'components/preference.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await PreferencesManager.init();
   runApp(
     const MyApp(),
   );

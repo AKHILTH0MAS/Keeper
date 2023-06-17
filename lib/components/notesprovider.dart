@@ -1,14 +1,21 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:notes/components/preference.dart';
 
 class NotesProvider extends ChangeNotifier {
-  List<String> title = [];
-  List<String> description = [];
+  NotesProvider() {
+    titles = sharedPreference?.getStringList('sTitle') ?? [];
+    descriptions = sharedPreference?.getStringList('sDescription') ?? [];
+  }
+  final sharedPreference = PreferencesManager.sharedPreferences;
+  List<String> titles = [];
+  List<String> descriptions = [];
   List path = [];
-  addnote(title1, description1, path1) {
-    title.add(title1);
-    description.add(description1);
-    path.add(path1);
+  void addnote(title1, description1) {
+    titles.add(title1);
+    descriptions.add(description1);
+    sharedPreference?.setStringList('sTitle', titles);
+    sharedPreference?.setStringList('sDescription', descriptions);
     notifyListeners();
   }
 }
