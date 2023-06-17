@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes/components/notesprovider.dart';
-import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AddNoteButton extends StatelessWidget {
   const AddNoteButton({
@@ -25,14 +24,16 @@ class AddNoteButton extends StatelessWidget {
         ),
       ),
       onPressed: () {
-        Provider.of<NotesProvider>(context, listen: false).addnote(
-          titlecontroller.text,
-          descriptioncontroller.text,
-          "",
-        );
+        setNotes(titlecontroller.text, descriptioncontroller.text);
         Navigator.pop(context);
       },
       child: const Text('Add Note', style: TextStyle(color: Colors.black)),
     );
+  }
+
+  Future<void> setNotes(titleData, descriptionData) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setStringList('titleData', titleData);
+    pref.setStringList('discriptiondata', descriptionData);
   }
 }

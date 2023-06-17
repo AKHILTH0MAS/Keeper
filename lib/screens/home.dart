@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes/components/notesprovider.dart';
-import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../components/notesmini.dart';
 import '../components/search.dart';
@@ -14,6 +13,13 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final int _selectedindex = 0;
+  List<String> noteTitle = [];
+  List<String> noteDiscription = [];
+  @override
+  void initState() {
+    super.initState();
+    getNotesData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +71,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               const Searchbar(),
               const SizedBox(height: 10),
-              if (Provider.of<NotesProvider>(context).title.isEmpty)
+              if (noteTitle.isEmpty)
                 const Center(
                   child: Text(
                     'No Notes',
@@ -81,15 +87,11 @@ class _HomePageState extends State<HomePage> {
                   shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
-                  itemCount: int.parse(Provider.of<NotesProvider>(context)
-                      .title
-                      .length
-                      .toString()),
+                  itemCount: noteTitle.length,
                   itemBuilder: (BuildContext context, int index) {
                     return NotesMini(
-                        title: Provider.of<NotesProvider>(context).title[index],
-                        description: Provider.of<NotesProvider>(context)
-                            .description[index]);
+                        title: noteTitle[index],
+                        description: noteDiscription[index]);
                   },
                 ),
             ],
@@ -97,5 +99,12 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  Future<void> getNotesData() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    noteTitle = pref.getStringList('titleData')!;
+    noteDiscription = pref.getStringList('discriptiondata')!;
+    setState(() {});
   }
 }

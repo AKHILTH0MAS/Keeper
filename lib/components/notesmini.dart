@@ -5,12 +5,10 @@ class NotesMini extends StatelessWidget {
     super.key,
     required this.title,
     required this.description,
-    this.path,
   });
 
   final String title;
   final String description;
-  final String? path;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
