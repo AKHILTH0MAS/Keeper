@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../components/addnotebutton.dart';
 import '../components/descritionfield.dart';
+import '../components/notesprovider.dart';
 import '../components/textfieldtitle.dart';
 
 class AddNote extends StatefulWidget {
@@ -37,6 +40,9 @@ class _AddNoteState extends State<AddNote> {
         currentIndex: selectedindex,
         onTap: (index) async {
           if (index == 0) {}
+          // if (index == 1) {
+          //   Navigator.pushNamed(context, '/mic');
+          // }
         },
       ),
       appBar: AppBar(
@@ -45,6 +51,8 @@ class _AddNoteState extends State<AddNote> {
         actions: [
           IconButton(
               onPressed: () {
+                Provider.of<NotesProvider>(context, listen: false).addnote(
+                    titlecontroller.text, descriptioncontroller.text, "");
                 Navigator.pop(context);
               },
               icon: const Icon(Icons.save))
