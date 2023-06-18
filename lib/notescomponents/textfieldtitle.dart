@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-class TextfieldTitle extends StatelessWidget {
-  const TextfieldTitle({
+class Textfield extends StatelessWidget {
+  const Textfield({
     super.key,
     required this.titlecontroller,
+    required this.hint,
   });
 
   final TextEditingController titlecontroller;
+  final String hint;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +21,7 @@ class TextfieldTitle extends StatelessWidget {
       ),
       child: TextField(
         controller: titlecontroller,
-        decoration:
-            const InputDecoration(border: InputBorder.none, hintText: "Title"),
+        decoration: InputDecoration(border: InputBorder.none, hintText: hint),
       ),
     );
   }

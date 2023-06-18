@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:notes/components/notesprovider.dart';
+import 'package:notes/notescomponents/notesprovider.dart';
 import 'package:provider/provider.dart';
 
-import '../components/notesmini.dart';
-import '../components/search.dart';
+import '../notescomponents/notesmini.dart';
+import '../notescomponents/search.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,12 +13,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final int _selectedindex = 0;
-
   @override
   Widget build(BuildContext context) {
+    const int selectedindex = 0;
     final titles = Provider.of<NotesProvider>(context).titles;
     final descriptions = Provider.of<NotesProvider>(context).descriptions;
+    final resultstitles =
+        Provider.of<NotesProvider>(context).notesresultstitles;
+    final resultsdescription =
+        Provider.of<NotesProvider>(context).notesresultsdescriptions;
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -35,21 +39,20 @@ class _HomePageState extends State<HomePage> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add Note'),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
+            icon: Icon(Icons.task_alt),
+            label: 'Tasks',
             backgroundColor: Colors.black,
           ),
         ],
         selectedItemColor: Colors.amber[800],
-        currentIndex: _selectedindex,
+        currentIndex: selectedindex,
         onTap: (index) {
           if (index == 0) {
             Navigator.pushReplacementNamed(context, '/');
           }
           if (index == 1) {
-            Navigator.pushNamed(context, '/addnote');
+            Navigator.pushNamed(context, '/tasklist');
           }
         },
       ),
@@ -83,10 +86,16 @@ class _HomePageState extends State<HomePage> {
                   shrinkWrap: true,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
+                  physics: const ScrollPhysics(),
                   itemCount: titles.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return NotesMini(
-                        title: titles[index], description: descriptions[index]);
+                    return resultstitles.isNotEmpty
+                        ? NotesMini(
+                            title: resultstitles[index],
+                            description: resultsdescription[index])
+                        : NotesMini(
+                            title: titles[index],
+                            description: descriptions[index]);
                   },
                 ),
             ],

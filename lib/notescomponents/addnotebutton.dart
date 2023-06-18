@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notes/components/notesprovider.dart';
+import 'package:notes/notescomponents/notesprovider.dart';
 import 'package:provider/provider.dart';
 
 class AddNoteButton extends StatelessWidget {

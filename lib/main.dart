@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:notes/screens/addnote.dart';
 import 'package:notes/screens/home.dart';
+import 'package:notes/screens/tasklist.dart';
 import 'package:provider/provider.dart';
-import 'components/notesprovider.dart';
-import 'components/preference.dart';
+import 'notescomponents/notesprovider.dart';
+import 'notescomponents/preference.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/': (context) => const HomePage(),
           '/addnote': (context) => const AddNote(),
+          '/tasklist': (context) => const Tasks(),
         },
         initialRoute: '/',
       ),

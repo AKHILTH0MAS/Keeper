@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../components/addnotebutton.dart';
-import '../components/descritionfield.dart';
-import '../components/notesprovider.dart';
-import '../components/textfieldtitle.dart';
+import '../notescomponents/addnotebutton.dart';
+import '../notescomponents/descritionfield.dart';
+import '../notescomponents/notesprovider.dart';
+import '../notescomponents/textfieldtitle.dart';
 
 class AddNote extends StatefulWidget {
   const AddNote({super.key});
@@ -19,32 +19,7 @@ class _AddNoteState extends State<AddNote> {
   final descriptioncontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    int selectedindex = 0;
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.camera_alt_outlined),
-            label: "Camera",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.mic_rounded),
-            label: "Mic",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.checklist),
-            label: 'Checklist',
-          ),
-        ],
-        selectedItemColor: Colors.amber[800],
-        currentIndex: selectedindex,
-        onTap: (index) async {
-          if (index == 0) {}
-          // if (index == 1) {
-          //   Navigator.pushNamed(context, '/mic');
-          // }
-        },
-      ),
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Add Note"),
@@ -67,7 +42,10 @@ class _AddNoteState extends State<AddNote> {
             children: [
               const SizedBox(height: 30),
               Text("Title", style: Theme.of(context).textTheme.headlineSmall),
-              TextfieldTitle(titlecontroller: titlecontroller),
+              Textfield(
+                titlecontroller: titlecontroller,
+                hint: "Title",
+              ),
               const SizedBox(height: 10),
               Text("Description",
                   style: Theme.of(context).textTheme.headlineSmall),
