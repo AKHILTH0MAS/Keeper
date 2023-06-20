@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/colors.dart';
 import 'package:provider/provider.dart';
 
 import 'notesprovider.dart';
@@ -14,6 +15,8 @@ class NotesMini extends StatelessWidget {
   final String description;
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
+
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () => showDialog(
@@ -58,14 +61,14 @@ class NotesMini extends StatelessWidget {
         width: size.width * 0.5,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: const Color.fromARGB(86, 178, 215, 220),
+          color: isDarkTheme ? darkPrimay : primaryColor,
         ),
         child: Column(
           children: [
             Text(
               title,
-              style: const TextStyle(
-                color: Colors.black,
+              style: TextStyle(
+                color: isDarkTheme ? darkTexttheme : primaryTexttheme,
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
               ),
@@ -74,8 +77,8 @@ class NotesMini extends StatelessWidget {
             Text(
               description,
               maxLines: 4,
-              style: const TextStyle(
-                color: Colors.black,
+              style: TextStyle(
+                color: isDarkTheme ? darkTexttheme : primaryTexttheme,
                 fontSize: 18,
                 fontWeight: FontWeight.normal,
               ),

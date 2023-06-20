@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:notes/notescomponents/notesprovider.dart';
 import 'package:provider/provider.dart';
 
+import '../colors.dart';
+import '../notescomponents/bottomnavigation.dart';
 import '../notescomponents/notesmini.dart';
 import '../notescomponents/search.dart';
 
@@ -22,9 +24,12 @@ class _HomePageState extends State<HomePage> {
         Provider.of<NotesProvider>(context).notesresultstitles;
     final resultsdescription =
         Provider.of<NotesProvider>(context).notesresultsdescriptions;
+    final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
 
     return Scaffold(
+      backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
       floatingActionButton: FloatingActionButton(
+        backgroundColor: isDarkTheme ? darkPrimay : primaryColor,
         onPressed: () {
           Navigator.pushNamed(context, '/addnote');
         },
@@ -33,34 +38,17 @@ class _HomePageState extends State<HomePage> {
           color: Colors.white,
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.task_alt),
-            label: 'Tasks',
-            backgroundColor: Colors.black,
-          ),
-        ],
-        selectedItemColor: Colors.amber[800],
-        currentIndex: selectedindex,
-        onTap: (index) {
-          if (index == 0) {
-            Navigator.pushReplacementNamed(context, '/');
-          }
-          if (index == 1) {
-            Navigator.pushNamed(context, '/tasklist');
-          }
-        },
-      ),
+      bottomNavigationBar: BottomNavigationcustom(
+          isDarkTheme: isDarkTheme, selectedindex: selectedindex),
       appBar: AppBar(
+        elevation: 0,
+        backgroundColor: isDarkTheme ? darkPrimay : primaryColor,
         actions: [
           IconButton(onPressed: () {}, icon: const Icon(Icons.sunny)),
         ],
-        title: const Text('Notes', style: TextStyle(color: Colors.yellow)),
+        title: Text('Notes',
+            style: TextStyle(
+                color: isDarkTheme ? darkTexttheme : primaryTexttheme)),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -71,11 +59,11 @@ class _HomePageState extends State<HomePage> {
               const Searchbar(),
               const SizedBox(height: 10),
               if (titles.isEmpty)
-                const Center(
+                Center(
                   child: Text(
                     'No Notes',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: isDarkTheme ? darkTexttheme : primaryTexttheme,
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),
@@ -87,7 +75,9 @@ class _HomePageState extends State<HomePage> {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
                   physics: const ScrollPhysics(),
-                  itemCount: titles.length,
+                  itemCount: resultstitles.isNotEmpty
+                      ? resultstitles.length
+                      : titles.length,
                   itemBuilder: (BuildContext context, int index) {
                     return resultstitles.isNotEmpty
                         ? NotesMini(

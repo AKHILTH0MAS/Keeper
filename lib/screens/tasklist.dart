@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:notes/colors.dart';
 import 'package:notes/notescomponents/notesprovider.dart';
 import 'package:notes/taskcomponets/taskfield.dart';
 import 'package:provider/provider.dart';
 
+import '../notescomponents/bottomnavigation.dart';
 import '../notescomponents/search.dart';
 import '../taskcomponets/taskcard.dart';
 
@@ -19,44 +21,38 @@ class _TasksState extends State<Tasks> {
   Widget build(BuildContext context) {
     int selectedindex = 1;
     final tasks = Provider.of<NotesProvider>(context).tasks;
+    final tasksresults = Provider.of<NotesProvider>(context).tasksresults;
+    final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
+
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.task_alt),
-            label: 'Tasks',
-            backgroundColor: Colors.black,
-          ),
-        ],
-        selectedItemColor: Colors.amber[800],
-        currentIndex: selectedindex,
-        onTap: (index) {
-          if (index == 0) {
-            Navigator.pushReplacementNamed(context, '/');
-          }
-          if (index == 1) {
-            Navigator.pushReplacementNamed(context, '/tasklist');
-          }
-        },
+      backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+      bottomNavigationBar: BottomNavigationcustom(
+        isDarkTheme: isDarkTheme,
+        selectedindex: selectedindex,
       ),
       appBar: AppBar(
-        title: const Text("Tasks"),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: isDarkTheme ? darkPrimay : primaryColor,
+        title: Text(
+          "Tasks",
+          style: TextStyle(
+            color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
           children: [
+            const SizedBox(height: 10),
             const Searchbar(),
             const SizedBox(height: 10),
             if (tasks.isEmpty) ...[
-              const Text(
+              Text(
                 "NO TASKS",
                 style: TextStyle(
-                    color: Colors.black,
+                    color: isDarkTheme ? darkTexttheme : primaryTexttheme,
                     fontSize: 22,
                     fontWeight: FontWeight.bold),
               ),
@@ -65,9 +61,13 @@ class _TasksState extends State<Tasks> {
             ] else ...[
               Expanded(
                 child: ListView.builder(
-                  itemCount: tasks.length,
+                  itemCount: tasksresults.isNotEmpty
+                      ? tasksresults.length
+                      : tasks.length,
                   itemBuilder: (context, index) {
-                    return TaskCard(task: tasks[index]);
+                    return tasksresults.isNotEmpty
+                        ? TaskCard(task: tasksresults[index])
+                        : TaskCard(task: tasks[index]);
                   },
                 ),
               ),

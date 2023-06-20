@@ -10,6 +10,7 @@ class NotesProvider extends ChangeNotifier {
   }
 
   final sharedPreference = PreferencesManager.sharedPreferences;
+  bool isDarktheme = true;
   List<String> titles = [];
   List<String> descriptions = [];
   List<String> path = [];
@@ -52,6 +53,7 @@ class NotesProvider extends ChangeNotifier {
       if (titles[index].toLowerCase().contains(keyword.toLowerCase())) {
         notesresultstitles.add(titles[index]);
         notesresultsdescriptions.add(descriptions[index]);
+        // notifyListeners();
       }
     }
   }
@@ -61,6 +63,7 @@ class NotesProvider extends ChangeNotifier {
     for (int index = 0; index < tasks.length; index++) {
       if (tasks[index].toLowerCase().contains(keyword.toLowerCase())) {
         tasksresults.add(tasks[index]);
+        // notifyListeners();
       }
     }
   }

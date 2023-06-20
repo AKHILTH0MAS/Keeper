@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/colors.dart';
 import 'package:notes/notescomponents/notesprovider.dart';
 import 'package:provider/provider.dart';
 
@@ -19,7 +20,7 @@ class _SearchbarState extends State<Searchbar> {
     Size size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: primaryColor,
         borderRadius: BorderRadius.circular(50),
       ),
       width: double.infinity,
@@ -27,7 +28,7 @@ class _SearchbarState extends State<Searchbar> {
         padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Row(
           children: [
-            const Icon(Icons.search, color: Colors.white),
+            const Icon(Icons.search, color: Colors.black),
             const SizedBox(width: 10),
             SizedBox(
               width: size.width * 0.68,
@@ -35,10 +36,10 @@ class _SearchbarState extends State<Searchbar> {
                 controller: searchController,
                 decoration: const InputDecoration(
                   hintText: 'Search',
-                  hintStyle: TextStyle(color: Colors.white),
+                  hintStyle: TextStyle(color: Colors.black),
                   border: InputBorder.none,
                 ),
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.black),
               ),
             ),
             IconButton(
@@ -48,7 +49,7 @@ class _SearchbarState extends State<Searchbar> {
                   Provider.of<NotesProvider>(context, listen: false)
                       .searchTasks(searchController.text);
                 },
-                icon: const Icon(Icons.filter_alt, color: Colors.white))
+                icon: const Icon(Icons.arrow_right_alt, color: Colors.black))
           ],
         ),
       ),
