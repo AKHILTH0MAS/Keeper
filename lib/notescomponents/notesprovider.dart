@@ -19,6 +19,11 @@ class NotesProvider extends ChangeNotifier {
   List<String> notesresultsdescriptions = [];
   List<String> tasksresults = [];
 
+  void darkTheme() {
+    isDarktheme = !isDarktheme;
+    notifyListeners();
+  }
+
   void addnote(String title, String description1) {
     titles.add(title);
     descriptions.add(description1);
@@ -43,6 +48,7 @@ class NotesProvider extends ChangeNotifier {
 
   void deleteTask(String task) {
     tasks.remove(task);
+    sharedPreference?.setStringList('sTask', tasks);
     notifyListeners();
   }
 
@@ -66,5 +72,24 @@ class NotesProvider extends ChangeNotifier {
         // notifyListeners();
       }
     }
+  }
+
+  void addbulletnote(
+    title,
+    String note1,
+    String note2,
+    String note3,
+    String note4,
+    String note5,
+    String note6,
+    String note7,
+  ) {
+    String description =
+        '•\t$note1\n•\t$note2\n•\t$note3\n•\t$note4\n•\t$note5\n•\t$note6\n•\t$note7';
+    titles.add(title);
+    descriptions.add(description);
+    sharedPreference?.setStringList('sTitle', titles);
+    sharedPreference?.setStringList('sDescription', descriptions);
+    notifyListeners();
   }
 }

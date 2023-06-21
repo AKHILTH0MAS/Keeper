@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes/screens/addnote.dart';
+import 'package:notes/screens/bulletlist.dart';
 import 'package:notes/screens/home.dart';
 import 'package:notes/screens/tasklist.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => const HomePage(),
           '/addnote': (context) => const AddNote(),
           '/tasklist': (context) => const Tasks(),
+          '/bulletlist': (context) => const BulletList(),
         },
         initialRoute: '/',
       ),

@@ -44,7 +44,12 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         backgroundColor: isDarkTheme ? darkPrimay : primaryColor,
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.sunny)),
+          IconButton(
+              onPressed: () {
+                Provider.of<NotesProvider>(context, listen: false).darkTheme();
+              },
+              icon: Icon(isDarkTheme ? Icons.sunny : Icons.dark_mode,
+                  color: isDarkTheme ? darkTexttheme : primaryTexttheme)),
         ],
         title: Text('Notes',
             style: TextStyle(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../colors.dart';
 import '../notescomponents/addnotebutton.dart';
 import '../notescomponents/descritionfield.dart';
 import '../notescomponents/notesprovider.dart';
@@ -19,7 +20,36 @@ class _AddNoteState extends State<AddNote> {
   final descriptioncontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    int selectedindex = 0;
+    final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'ADD NOTE',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.task_alt),
+              label: 'ADD POINTS',
+              backgroundColor: Colors.black,
+            ),
+          ],
+          unselectedIconTheme: IconThemeData(
+              color: isDarkTheme ? darkTexttheme : primaryTexttheme),
+          unselectedItemColor: isDarkTheme ? darkTexttheme : primaryTexttheme,
+          selectedIconTheme: IconThemeData(color: Colors.amber[800]),
+          selectedItemColor: Colors.amber[800],
+          currentIndex: selectedindex,
+          onTap: (index) {
+            if (index == 0) {
+              Navigator.pushReplacementNamed(context, '/addnote');
+            }
+            if (index == 1) {
+              Navigator.pushReplacementNamed(context, '/bulletlist');
+            }
+          }),
       appBar: AppBar(
         centerTitle: true,
         title: const Text("Add Note"),

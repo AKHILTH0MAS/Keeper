@@ -64,13 +64,16 @@ class NotesMini extends StatelessWidget {
           color: isDarkTheme ? darkPrimay : primaryColor,
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: TextStyle(
-                color: isDarkTheme ? darkTexttheme : primaryTexttheme,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
+            Center(
+              child: Text(
+                title,
+                style: TextStyle(
+                  color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             const SizedBox(height: 5),
