@@ -7,6 +7,7 @@ class NotesProvider extends ChangeNotifier {
     titles = sharedPreference?.getStringList('sTitle') ?? [];
     descriptions = sharedPreference?.getStringList('sDescription') ?? [];
     tasks = sharedPreference?.getStringList('sTask') ?? [];
+    isDarktheme = sharedPreference?.getBool('darktheme') ?? true;
   }
 
   final sharedPreference = PreferencesManager.sharedPreferences;
@@ -21,6 +22,7 @@ class NotesProvider extends ChangeNotifier {
 
   void darkTheme() {
     isDarktheme = !isDarktheme;
+    sharedPreference?.setBool('darktheme', isDarktheme);
     notifyListeners();
   }
 

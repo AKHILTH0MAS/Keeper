@@ -35,7 +35,7 @@ class BottomNavigationcustom extends StatelessWidget {
       currentIndex: selectedindex,
       onTap: (index) {
         if (index == 0) {
-          Navigator.pushReplacementNamed(context, '/');
+          Navigator.pushReplacementNamed(context, '/home');
         }
         if (index == 1) {
           Navigator.pushReplacementNamed(context, '/tasklist');
