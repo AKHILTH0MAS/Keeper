@@ -54,6 +54,7 @@ class _BulletListState extends State<BulletList> {
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       color: isDarkTheme ? darkTexttheme : primaryTexttheme)),
               Textfield(
+                keyboard: TextInputType.text,
                 titlecontroller: titlecontroller,
                 hint: "Title",
               ),

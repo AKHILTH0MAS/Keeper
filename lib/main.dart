@@ -4,7 +4,9 @@ import 'package:notes/screens/addnote.dart';
 import 'package:notes/screens/bulletlist.dart';
 import 'package:notes/screens/home.dart';
 import 'package:notes/screens/login.dart';
+import 'package:notes/screens/regiter.dart';
 import 'package:notes/screens/tasklist.dart';
+import 'package:notes/screens/widgettree.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'notescomponents/notesprovider.dart';
@@ -34,11 +36,13 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         routes: {
-          '/home': (context) => const HomePage(),
-          '/': (context) => LoginPage(),
+          '/home': (context) => HomePage(),
+          '/login': (context) => const LoginPage(),
+          '/register': (context) => const RegisterPage(),
           '/addnote': (context) => const AddNote(),
           '/tasklist': (context) => const Tasks(),
           '/bulletlist': (context) => const BulletList(),
+          '/': (context) => const WidgetTree(),
         },
         initialRoute: '/',
       ),

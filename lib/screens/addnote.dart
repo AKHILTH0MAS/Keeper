@@ -22,7 +22,10 @@ class _AddNoteState extends State<AddNote> {
   Widget build(BuildContext context) {
     int selectedindex = 0;
     final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
+    final emptyNote = Provider.of<NotesProvider>(context).emptyNote;
+
     return Scaffold(
+      backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
           items: const [
@@ -51,8 +54,14 @@ class _AddNoteState extends State<AddNote> {
             }
           }),
       appBar: AppBar(
+        backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
         centerTitle: true,
-        title: const Text("Add Note"),
+        title: Text(
+          "Add Note",
+          style: TextStyle(
+            color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+          ),
+        ),
         actions: [
           IconButton(
               onPressed: () {
@@ -60,7 +69,10 @@ class _AddNoteState extends State<AddNote> {
                     .addnote(titlecontroller.text, descriptioncontroller.text);
                 Navigator.pop(context);
               },
-              icon: const Icon(Icons.save))
+              icon: Icon(
+                Icons.save,
+                color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+              ))
         ],
       ),
       body: SingleChildScrollView(
@@ -73,6 +85,7 @@ class _AddNoteState extends State<AddNote> {
               const SizedBox(height: 30),
               Text("Title", style: Theme.of(context).textTheme.headlineSmall),
               Textfield(
+                keyboard: TextInputType.text,
                 titlecontroller: titlecontroller,
                 hint: "Title",
               ),
@@ -85,6 +98,14 @@ class _AddNoteState extends State<AddNote> {
               AddNoteButton(
                   titlecontroller: titlecontroller,
                   descriptioncontroller: descriptioncontroller),
+              if (emptyNote) ...[
+                Text(
+                  "Title and description cannot be empty",
+                  style: TextStyle(
+                    color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+                  ),
+                )
+              ]
             ],
           ),
         ),

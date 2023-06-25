@@ -1,14 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/notescomponents/notesprovider.dart';
 import 'package:provider/provider.dart';
 
 import '../colors.dart';
+import '../notescomponents/auth.dart';
 import '../notescomponents/bottomnavigation.dart';
 import '../notescomponents/notesmini.dart';
 import '../notescomponents/search.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  final User? user = Auth().currentUser;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -44,6 +48,15 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         backgroundColor: isDarkTheme ? darkPrimay : primaryColor,
         actions: [
+          IconButton(
+            onPressed: () {
+              Auth().signOut();
+            },
+            icon: Icon(
+              Icons.logout,
+              color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+            ),
+          ),
           IconButton(
               onPressed: () {
                 Provider.of<NotesProvider>(context, listen: false).darkTheme();

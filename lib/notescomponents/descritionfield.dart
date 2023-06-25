@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:notes/colors.dart';
+import 'package:provider/provider.dart';
+
+import 'notesprovider.dart';
 
 class TextfeildDescription extends StatelessWidget {
   const TextfeildDescription({
@@ -10,9 +14,13 @@ class TextfeildDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
+
     return Container(
       padding: const EdgeInsets.all(10),
-      margin: const EdgeInsets.symmetric(horizontal: 15),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 15,
+      ),
       decoration: BoxDecoration(
         color: Colors.grey,
         border: Border.all(),
@@ -20,6 +28,7 @@ class TextfeildDescription extends StatelessWidget {
       ),
       child: TextField(
         controller: descriptioncontroller,
+        style: TextStyle(color: isDarkTheme ? darkTexttheme : primaryTexttheme),
         maxLines: 10,
         decoration: const InputDecoration(
           border: InputBorder.none,

@@ -1,25 +1,25 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
-import 'package:notes/notescomponents/auth.dart';
 import 'package:notes/notescomponents/textfieldtitle.dart';
 import 'package:provider/provider.dart';
+import '../notescomponents/auth.dart';
 import '../notescomponents/notesprovider.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   String? errorMessage = '';
 
-  Future<void> signInWithEmailandPassword() async {
+  Future<void> createUserWIthEmailAndPassword() async {
     try {
-      Auth().signInWithEmailAndPassword(
-          email: userNameController.text, password: passwordController.text);
+      Auth().createSignInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
     } on FirebaseAuthException catch (e) {
       setState(() {
         errorMessage = e.message;
@@ -27,9 +27,9 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  final TextEditingController userNameController = TextEditingController();
+  final emailController = TextEditingController();
 
-  final TextEditingController passwordController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,48 +43,47 @@ class _LoginPageState extends State<LoginPage> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.2,
               ),
               Text(
-                "Login Now...!",
+                "Register",
                 style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                       color: isDarkTheme ? darkTexttheme : primaryTexttheme,
                     ),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "Enter your email",
+                  "Email",
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                         color: isDarkTheme ? darkTexttheme : primaryTexttheme,
                       ),
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               Textfield(
-                titlecontroller: userNameController,
-                hint: "Enter your email",
-                keyboard: TextInputType.emailAddress,
-              ),
+                  titlecontroller: emailController,
+                  keyboard: TextInputType.text,
+                  hint: "Email"),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  "Password",
-                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                        color: isDarkTheme ? darkTexttheme : primaryTexttheme,
-                      ),
-                ),
+                child: Text("Password",
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                          color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+                        )),
+              ),
+              const SizedBox(
+                height: 20,
               ),
               Textfield(
                 titlecontroller: passwordController,
@@ -97,9 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                   const Spacer(),
                   GestureDetector(
                     onTap: () {
-                      Auth().signInWithEmailAndPassword(
-                          email: userNameController.text,
-                          password: passwordController.text);
+                      createUserWIthEmailAndPassword();
                     },
                     child: Container(
                       margin: const EdgeInsets.only(right: 20),
@@ -109,14 +106,26 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
-                        'Login',
+                        'Register',
                         style: TextStyle(
-                            color:
-                                isDarkTheme ? darkTexttheme : primaryTexttheme),
+                          color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+                        ),
                       ),
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              GestureDetector(
+                onTap: () => Navigator.pushNamed(context, '/login'),
+                child: Text(
+                  "Already a user ->",
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                        color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+                      ),
+                ),
               ),
               const SizedBox(
                 height: 10,
@@ -126,9 +135,6 @@ class _LoginPageState extends State<LoginPage> {
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       color: isDarkTheme ? darkTexttheme : primaryTexttheme,
                     ),
-              ),
-              const SizedBox(
-                height: 10,
               ),
             ],
           ),

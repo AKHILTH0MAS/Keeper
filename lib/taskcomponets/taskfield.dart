@@ -32,6 +32,9 @@ class Taskfield extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: TextField(
+              style: TextStyle(
+                color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+              ),
               controller: titlecontroller,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -52,8 +55,11 @@ class Taskfield extends StatelessWidget {
                   ),
                   padding: const MaterialStatePropertyAll(EdgeInsets.all(10))),
               onPressed: () {
-                Provider.of<NotesProvider>(context, listen: false)
-                    .addTask(titlecontroller.text);
+                if (titlecontroller.text.isNotEmpty) {
+                  Provider.of<NotesProvider>(context, listen: false)
+                      .addTask(titlecontroller.text);
+                  titlecontroller.clear();
+                }
               },
               child: Text(
                 "ADD",

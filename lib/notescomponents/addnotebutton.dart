@@ -28,11 +28,14 @@ class AddNoteButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Provider.of<NotesProvider>(context, listen: false).addnote(
-              titlecontroller.text,
-              descriptioncontroller.text,
-            );
-            Navigator.pop(context);
+            if (titlecontroller.text.isNotEmpty &&
+                descriptioncontroller.text.isNotEmpty) {
+              Provider.of<NotesProvider>(context, listen: false).addnote(
+                titlecontroller.text,
+                descriptioncontroller.text,
+              );
+              Navigator.pop(context);
+            }
           },
           child: const Text('Add Note', style: TextStyle(color: Colors.black)),
         ),
@@ -79,17 +82,20 @@ class AddBulletButton extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Provider.of<NotesProvider>(context, listen: false).addbulletnote(
-              titlecontroller.text,
-              descriptioncontroller1.text,
-              descriptioncontroller2.text,
-              descriptioncontroller3.text,
-              descriptioncontroller4.text,
-              descriptioncontroller5.text,
-              descriptioncontroller6.text,
-              descriptioncontroller7.text,
-            );
-            Navigator.pop(context);
+            if (titlecontroller.text.isNotEmpty &&
+                descriptioncontroller1.text.isNotEmpty) {
+              Provider.of<NotesProvider>(context, listen: false).addbulletnote(
+                titlecontroller.text,
+                descriptioncontroller1.text,
+                descriptioncontroller2.text,
+                descriptioncontroller3.text,
+                descriptioncontroller4.text,
+                descriptioncontroller5.text,
+                descriptioncontroller6.text,
+                descriptioncontroller7.text,
+              );
+              Navigator.pop(context);
+            }
           },
           child: const Text('Add Note', style: TextStyle(color: Colors.black)),
         ),

@@ -12,6 +12,7 @@ class NotesProvider extends ChangeNotifier {
 
   final sharedPreference = PreferencesManager.sharedPreferences;
   bool isDarktheme = true;
+  bool emptyNote = false;
   List<String> titles = [];
   List<String> descriptions = [];
   List<String> path = [];
@@ -74,6 +75,11 @@ class NotesProvider extends ChangeNotifier {
         // notifyListeners();
       }
     }
+  }
+
+  void emptynote() {
+    emptyNote == false ? true : false;
+    notifyListeners();
   }
 
   void addbulletnote(
