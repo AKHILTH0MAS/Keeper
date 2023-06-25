@@ -100,6 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                       Auth().signInWithEmailAndPassword(
                           email: userNameController.text,
                           password: passwordController.text);
+                      Navigator.of(context).popAndPushNamed('/home');
                     },
                     child: Container(
                       margin: const EdgeInsets.only(right: 20),
