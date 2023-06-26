@@ -4,7 +4,7 @@ import 'package:notes/notescomponents/notesprovider.dart';
 import 'package:provider/provider.dart';
 
 import '../colors.dart';
-import '../notescomponents/auth.dart';
+import '../services/auth.dart';
 import '../notescomponents/bottomnavigation.dart';
 import '../notescomponents/notesmini.dart';
 import '../notescomponents/search.dart';
@@ -21,13 +21,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final resultNotes = Provider.of<NotesProvider>(context).notesresults;
+
     const int selectedindex = 0;
-    final titles = Provider.of<NotesProvider>(context).titles;
-    final descriptions = Provider.of<NotesProvider>(context).descriptions;
-    final resultstitles =
-        Provider.of<NotesProvider>(context).notesresultstitles;
-    final resultsdescription =
-        Provider.of<NotesProvider>(context).notesresultsdescriptions;
+    final notes = Provider.of<NotesProvider>(context).notes;
+
     final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
 
     return Scaffold(
@@ -76,7 +74,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               const Searchbar(),
               const SizedBox(height: 10),
-              if (titles.isEmpty)
+              if (notes.isEmpty)
                 Center(
                   child: Text(
                     'No Notes',
@@ -93,17 +91,15 @@ class _HomePageState extends State<HomePage> {
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
                   physics: const ScrollPhysics(),
-                  itemCount: resultstitles.isNotEmpty
-                      ? resultstitles.length
-                      : titles.length,
+                  itemCount: resultNotes.isNotEmpty
+                      ? resultNotes.length
+                      : notes.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return resultstitles.isNotEmpty
+                    return resultNotes.isNotEmpty
                         ? NotesMini(
-                            title: resultstitles[index],
-                            description: resultsdescription[index])
-                        : NotesMini(
-                            title: titles[index],
-                            description: descriptions[index]);
+                            note: resultNotes[index],
+                          )
+                        : NotesMini(note: notes[index]);
                   },
                 ),
             ],

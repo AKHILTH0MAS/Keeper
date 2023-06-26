@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
-import 'package:notes/notescomponents/auth.dart';
+import 'package:notes/services/auth.dart';
 import 'package:notes/notescomponents/textfieldtitle.dart';
 import 'package:provider/provider.dart';
 import '../notescomponents/notesprovider.dart';

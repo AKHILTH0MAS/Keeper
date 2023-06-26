@@ -2,24 +2,29 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/notescomponents/preference.dart';
 
+import '../services/db.dart';
+import 'notesClass.dart';
+
 class NotesProvider extends ChangeNotifier {
   NotesProvider() {
-    titles = sharedPreference?.getStringList('sTitle') ?? [];
-    descriptions = sharedPreference?.getStringList('sDescription') ?? [];
+    notes = [];
     tasks = sharedPreference?.getStringList('sTask') ?? [];
     isDarktheme = sharedPreference?.getBool('darktheme') ?? true;
   }
 
   final sharedPreference = PreferencesManager.sharedPreferences;
   bool isDarktheme = true;
+  bool search = true;
   bool emptyNote = false;
-  List<String> titles = [];
-  List<String> descriptions = [];
-  List<String> path = [];
+  List<Note> notes = [];
   List<String> tasks = [];
-  List<String> notesresultstitles = [];
-  List<String> notesresultsdescriptions = [];
+  List<Note> notesresults = [];
   List<String> tasksresults = [];
+
+  void searchbool() {
+    search = !search;
+    notifyListeners();
+  }
 
   void darkTheme() {
     isDarktheme = !isDarktheme;
@@ -27,19 +32,15 @@ class NotesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addnote(String title, String description1) {
-    titles.add(title);
-    descriptions.add(description1);
-    sharedPreference?.setStringList('sTitle', titles);
-    sharedPreference?.setStringList('sDescription', descriptions);
+  void addnote(String title, String description) {
+    Note note = Note.newconstructor(title, description);
+    notes.add(note);
     notifyListeners();
+    DB().saveNote(note);
   }
 
-  void deletenote(String title, String description) {
-    titles.remove(title);
-    descriptions.remove(description);
-    sharedPreference?.setStringList('sTitle', titles);
-    sharedPreference?.setStringList('sDescription', descriptions);
+  void deletenote(note) {
+    notes.remove(note);
     notifyListeners();
   }
 
@@ -56,13 +57,11 @@ class NotesProvider extends ChangeNotifier {
   }
 
   void searchNotes(String keyword) {
-    notesresultstitles.clear();
-    notesresultsdescriptions.clear();
-    for (int index = 0; index < titles.length; index++) {
-      if (titles[index].toLowerCase().contains(keyword.toLowerCase())) {
-        notesresultstitles.add(titles[index]);
-        notesresultsdescriptions.add(descriptions[index]);
-        // notifyListeners();
+    notesresults.clear();
+    for (int index = 0; index < notes.length; index++) {
+      if (notes[index].call().toLowerCase().contains(keyword.toLowerCase())) {
+        notesresults.add(notes[index]);
+        notifyListeners();
       }
     }
   }
@@ -72,18 +71,13 @@ class NotesProvider extends ChangeNotifier {
     for (int index = 0; index < tasks.length; index++) {
       if (tasks[index].toLowerCase().contains(keyword.toLowerCase())) {
         tasksresults.add(tasks[index]);
-        // notifyListeners();
+        notifyListeners();
       }
     }
   }
 
-  void emptynote() {
-    emptyNote == false ? true : false;
-    notifyListeners();
-  }
-
   void addbulletnote(
-    title,
+    String title,
     String note1,
     String note2,
     String note3,
@@ -94,10 +88,9 @@ class NotesProvider extends ChangeNotifier {
   ) {
     String description =
         '•\t$note1\n•\t$note2\n•\t$note3\n•\t$note4\n•\t$note5\n•\t$note6\n•\t$note7';
-    titles.add(title);
-    descriptions.add(description);
-    sharedPreference?.setStringList('sTitle', titles);
-    sharedPreference?.setStringList('sDescription', descriptions);
+    Note note = Note.newconstructor(title, description);
+    notes.add(note);
+
     notifyListeners();
   }
 }

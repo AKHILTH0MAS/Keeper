@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes/screens/home.dart';
 import 'package:notes/screens/regiter.dart';
 
-import '../notescomponents/auth.dart';
+import '../services/auth.dart';
 
 class WidgetTree extends StatefulWidget {
   const WidgetTree({super.key});

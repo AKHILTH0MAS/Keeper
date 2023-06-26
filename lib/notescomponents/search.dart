@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
-import 'package:notes/notescomponents/notesprovider.dart';
 import 'package:provider/provider.dart';
+
+import 'notesprovider.dart';
 
 class Searchbar extends StatefulWidget {
   const Searchbar({
@@ -17,6 +18,7 @@ final TextEditingController searchController = TextEditingController();
 class _SearchbarState extends State<Searchbar> {
   @override
   Widget build(BuildContext context) {
+    bool search = Provider.of<NotesProvider>(context).search;
     Size size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
@@ -34,9 +36,9 @@ class _SearchbarState extends State<Searchbar> {
               width: size.width * 0.68,
               child: TextField(
                 controller: searchController,
-                decoration: const InputDecoration(
-                  hintText: 'Search',
-                  hintStyle: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  hintText: search ? 'Search' : 'press enter again to go back',
+                  hintStyle: const TextStyle(color: Colors.black),
                   border: InputBorder.none,
                 ),
                 style: const TextStyle(color: Colors.black),
@@ -48,6 +50,9 @@ class _SearchbarState extends State<Searchbar> {
                       .searchNotes(searchController.text);
                   Provider.of<NotesProvider>(context, listen: false)
                       .searchTasks(searchController.text);
+                  searchController.clear();
+                  Provider.of<NotesProvider>(context, listen: false)
+                      .searchbool();
                 },
                 icon: const Icon(Icons.arrow_right_alt, color: Colors.black))
           ],

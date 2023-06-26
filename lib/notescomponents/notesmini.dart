@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
 import 'package:provider/provider.dart';
 
+import 'notesClass.dart';
 import 'notesprovider.dart';
 
 class NotesMini extends StatelessWidget {
   const NotesMini({
     super.key,
-    required this.title,
-    required this.description,
+    required this.note,
   });
 
-  final String title;
-  final String description;
+  final Note note;
   @override
   Widget build(BuildContext context) {
     final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
@@ -23,13 +22,13 @@ class NotesMini extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(title),
+              title: Text(note.title),
               titleTextStyle: const TextStyle(
                 color: Colors.black,
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
               ),
-              content: Text(description),
+              content: Text(note.description),
               contentTextStyle: const TextStyle(
                 color: Colors.black,
                 fontSize: 25,
@@ -39,7 +38,7 @@ class NotesMini extends StatelessWidget {
                 TextButton(
                   onPressed: () {
                     Provider.of<NotesProvider>(context, listen: false)
-                        .deletenote(title, description);
+                        .deletenote(note);
                     Navigator.of(context).pop();
                   },
                   child: const Text(
@@ -68,7 +67,7 @@ class NotesMini extends StatelessWidget {
           children: [
             Center(
               child: Text(
-                title,
+                note.title,
                 style: TextStyle(
                   color: isDarkTheme ? darkTexttheme : primaryTexttheme,
                   fontSize: 22,
@@ -78,7 +77,7 @@ class NotesMini extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             Text(
-              description,
+              note.description,
               maxLines: 4,
               style: TextStyle(
                 color: isDarkTheme ? darkTexttheme : primaryTexttheme,

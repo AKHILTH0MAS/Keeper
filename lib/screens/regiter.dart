@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
 import 'package:notes/notescomponents/textfieldtitle.dart';
 import 'package:provider/provider.dart';
-import '../notescomponents/auth.dart';
+import '../services/auth.dart';
 import '../notescomponents/notesprovider.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -119,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: 20,
               ),
               GestureDetector(
-                onTap: () => Navigator.pushNamed(context, '/login'),
+                onTap: () => Navigator.pushReplacementNamed(context, '/login'),
                 child: Text(
                   "Already a user ->",
                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(
