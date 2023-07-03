@@ -9,7 +9,7 @@ import 'package:notes/screens/tasklist.dart';
 import 'package:notes/screens/widgettree.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'notescomponents/notesprovider.dart';
+import 'notescomponents/providers/notesprovider.dart';
 import 'notescomponents/preference.dart';
 
 Future<void> main() async {
@@ -28,24 +28,37 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => NotesProvider(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          useMaterial3: true,
-        ),
-        routes: {
-          '/home': (context) => HomePage(),
-          '/login': (context) => const LoginPage(),
-          '/register': (context) => const RegisterPage(),
-          '/addnote': (context) => const AddNote(),
-          '/tasklist': (context) => const Tasks(),
-          '/bulletlist': (context) => const BulletList(),
-          '/': (context) => const WidgetTree(),
-        },
-        initialRoute: '/',
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => NotesProvider()),
+      ],
+      child: const Materialapp(),
+    );
+  }
+}
+
+class Materialapp extends StatelessWidget {
+  const Materialapp({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        useMaterial3: true,
       ),
+      routes: {
+        '/home': (context) => HomePage(),
+        '/login': (context) => const LoginPage(),
+        '/register': (context) => const RegisterPage(),
+        '/addnote': (context) => const AddNote(),
+        '/tasklist': (context) => const Tasks(),
+        '/bulletlist': (context) => const BulletList(),
+        '/': (context) => const WidgetTree(),
+      },
+      initialRoute: '/',
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:notes/colors.dart';
 import 'package:provider/provider.dart';
 
 import '../notescomponents/addnotebutton.dart';
-import '../notescomponents/notesprovider.dart';
+import '../notescomponents/providers/notesprovider.dart';
 import '../notescomponents/textfieldtitle.dart';
 
 class BulletList extends StatefulWidget {
@@ -104,12 +104,16 @@ class BulletDiscription extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 15),
       padding: const EdgeInsets.all(10),
       child: TextField(
+        style: TextStyle(
+          color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+        ),
         controller: descriptioncontroller,
         decoration: InputDecoration(
-            border: InputBorder.none,
-            hintText: "• - Your point...",
-            hintStyle: TextStyle(
-                color: isDarkTheme ? darkTexttheme : primaryTexttheme)),
+          border: InputBorder.none,
+          hintText: "• - Your point...",
+          hintStyle:
+              TextStyle(color: isDarkTheme ? darkTexttheme : primaryTexttheme),
+        ),
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
 import 'package:provider/provider.dart';
 
-import '../notescomponents/notesprovider.dart';
+import '../notescomponents/providers/notesprovider.dart';
 
 class Taskfield extends StatelessWidget {
   const Taskfield({

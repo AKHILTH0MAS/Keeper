@@ -3,7 +3,7 @@ import 'package:notes/colors.dart';
 import 'package:provider/provider.dart';
 
 import 'notesClass.dart';
-import 'notesprovider.dart';
+import 'providers/notesprovider.dart';
 
 class NotesMini extends StatelessWidget {
   const NotesMini({

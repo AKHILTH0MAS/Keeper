@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
-import 'package:notes/notescomponents/notesprovider.dart';
+import 'package:notes/notescomponents/providers/notesprovider.dart';
 import 'package:notes/taskcomponets/taskfield.dart';
 import 'package:provider/provider.dart';
 

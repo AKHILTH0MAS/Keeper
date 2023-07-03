@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/notescomponents/preference.dart';
 
-import '../services/db.dart';
-import 'notesClass.dart';
+import '../../services/db.dart';
+import '../notesClass.dart';
 
 class NotesProvider extends ChangeNotifier {
   NotesProvider() {
@@ -76,6 +76,14 @@ class NotesProvider extends ChangeNotifier {
     }
   }
 
+  // List<Note> getNote() {
+  //   DB().readNote().then((value) {
+  //     List<Note> note = value;
+  //     notes = note;
+  //   });
+  //   return notes;
+  // }
+
   void addbulletnote(
     String title,
     String note1,
@@ -86,8 +94,15 @@ class NotesProvider extends ChangeNotifier {
     String note6,
     String note7,
   ) {
-    String description =
-        '•\t$note1\n•\t$note2\n•\t$note3\n•\t$note4\n•\t$note5\n•\t$note6\n•\t$note7';
+    String description = '';
+    description = (note1.isNotEmpty) ? '$description•\t$note1\n' : description;
+    description = (note2.isNotEmpty) ? '$description•\t$note2\n' : description;
+    description = (note3.isNotEmpty) ? '$description•\t$note3\n' : description;
+    description = (note4.isNotEmpty) ? '$description•\t$note4\n' : description;
+    description = (note5.isNotEmpty) ? '$description•\t$note5\n' : description;
+    description = (note6.isNotEmpty) ? '$description•\t$note6\n' : description;
+    description = (note7.isNotEmpty) ? '$description•\t$note7\n' : description;
+
     Note note = Note.newconstructor(title, description);
     notes.add(note);
 

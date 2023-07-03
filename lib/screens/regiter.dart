@@ -4,7 +4,7 @@ import 'package:notes/colors.dart';
 import 'package:notes/notescomponents/textfieldtitle.dart';
 import 'package:provider/provider.dart';
 import '../services/auth.dart';
-import '../notescomponents/notesprovider.dart';
+import '../notescomponents/providers/notesprovider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -21,9 +21,7 @@ class _RegisterPageState extends State<RegisterPage> {
       Auth().createSignInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
     } on FirebaseAuthException catch (e) {
-      setState(() {
-        errorMessage = e.message;
-      });
+      print(e.message);
     }
   }
 

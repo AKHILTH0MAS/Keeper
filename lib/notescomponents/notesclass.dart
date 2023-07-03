@@ -1,11 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
-
 class Note {
   Note({
     required this.title,
     required this.description,
   });
-  String uid = FirebaseAuth.instance.currentUser!.uid;
   String title;
   String description;
   String call() {
@@ -16,19 +13,17 @@ class Note {
     title = title;
     description = description;
   }
-  factory Note.fromjson(Map<String, dynamic>? json) {
-    return Note(
-      title: json!['title'],
-      description: json["description"],
-    );
-  }
+
   Map<String, dynamic> toJson() {
     return {
-      "uid": uid,
       "title": title,
       "description": description,
     };
   }
+
+  Note.fromFirestore(Map<String, dynamic> json)
+      : title = json['productId'],
+        description = json['productName'];
 }
 
 class Notesbullet {

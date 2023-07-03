@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:notes/notescomponents/notesprovider.dart';
+import 'package:notes/notescomponents/providers/notesprovider.dart';
 import 'package:provider/provider.dart';
 
 import '../colors.dart';

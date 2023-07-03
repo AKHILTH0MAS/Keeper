@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
 import 'package:provider/provider.dart';
 
-import 'notesprovider.dart';
+import 'providers/notesprovider.dart';
 
 class Searchbar extends StatefulWidget {
   const Searchbar({

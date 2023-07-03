@@ -4,7 +4,7 @@ import 'package:notes/colors.dart';
 import 'package:notes/services/auth.dart';
 import 'package:notes/notescomponents/textfieldtitle.dart';
 import 'package:provider/provider.dart';
-import '../notescomponents/notesprovider.dart';
+import '../notescomponents/providers/notesprovider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../colors.dart';
 import '../notescomponents/addnotebutton.dart';
 import '../notescomponents/descritionfield.dart';
-import '../notescomponents/notesprovider.dart';
+import '../notescomponents/providers/notesprovider.dart';
 import '../notescomponents/textfieldtitle.dart';
 
 class AddNote extends StatefulWidget {
