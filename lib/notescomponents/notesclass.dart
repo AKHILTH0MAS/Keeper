@@ -9,11 +9,6 @@ class Note {
     return title;
   }
 
-  Note.newconstructor(this.title, this.description) {
-    title = title;
-    description = description;
-  }
-
   Map<String, dynamic> toJson() {
     return {
       "title": title,
@@ -21,9 +16,12 @@ class Note {
     };
   }
 
-  Note.fromFirestore(Map<String, dynamic> json)
-      : title = json['productId'],
-        description = json['productName'];
+  factory Note.fromJson(Map<String, dynamic> json) {
+    return Note(
+      title: json["title"],
+      description: json["description"],
+    );
+  }
 }
 
 class Notesbullet {

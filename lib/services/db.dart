@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import '../notescomponents/notesClass.dart';
+import 'package:notes/notescomponents/notesclass.dart';
 
 class DB {
   User? user = FirebaseAuth.instance.currentUser;
@@ -14,17 +13,14 @@ class DB {
         .add(note.toJson());
   }
 
-  Future<List<Note>> readNotes() async {
-    final qs = await _firestore
-        .collection('Users')
-        .doc(user!.uid)
-        .collection('Notes')
-        .get();
-    if (qs.docs.isEmpty) return [];
-    List<Map<String, dynamic>> jsonNotes;
-    jsonNotes = qs.docs.map((e) => e.data()).toList();
-    List<Note> notes = [];
+  Stream<List<Note>> readNotes() {
+    return _firestore
+        .collection("Users/${user!.uid}/Notes")
+        .snapshots()
+        .map((qs) {
+      if (qs.docs.isEmpty) return [];
 
-    return notes;
+      return qs.docs.map((e) => Note.fromJson(e.data())).toList();
+    });
   }
 }

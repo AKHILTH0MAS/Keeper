@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:notes/notescomponents/notesclass.dart';
 import 'package:notes/notescomponents/preference.dart';
 
 import '../../services/db.dart';
-import '../notesClass.dart';
 
 class NotesProvider extends ChangeNotifier {
   NotesProvider() {
@@ -33,7 +33,7 @@ class NotesProvider extends ChangeNotifier {
   }
 
   void addnote(String title, String description) {
-    Note note = Note.newconstructor(title, description);
+    Note note = Note(title: title, description: description);
     notes.add(note);
     notifyListeners();
     DB().saveNote(note);
@@ -103,7 +103,7 @@ class NotesProvider extends ChangeNotifier {
     description = (note6.isNotEmpty) ? '$description•\t$note6\n' : description;
     description = (note7.isNotEmpty) ? '$description•\t$note7\n' : description;
 
-    Note note = Note.newconstructor(title, description);
+    Note note = Note(title: title, description: description);
     notes.add(note);
 
     notifyListeners();
