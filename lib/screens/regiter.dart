@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
@@ -21,7 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
       Auth().createSignInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
     } on FirebaseAuthException catch (e) {
-      print(e.message);
+      log("${e.message}");
     }
   }
 
