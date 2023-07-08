@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
+import 'package:notes/services/db.dart';
 import 'package:provider/provider.dart';
 
-import '../notescomponents/providers/notesprovider.dart';
+import '../providers/notesprovider.dart';
+import 'task.dart';
 
 class TaskCard extends StatelessWidget {
   const TaskCard({super.key, required this.task});
-  final String task;
+  final Task task;
   @override
   Widget build(BuildContext context) {
     final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
@@ -23,13 +25,12 @@ class TaskCard extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(task,
+            Text(task.taskname,
                 style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                     color: isDarkTheme ? darkTexttheme : primaryTexttheme)),
             IconButton(
               onPressed: () {
-                Provider.of<NotesProvider>(context, listen: false)
-                    .deleteTask(task);
+                DB().deletetask(task);
               },
               icon: Icon(
                 Icons.delete,

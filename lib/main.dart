@@ -2,14 +2,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/screens/addnote.dart';
 import 'package:notes/screens/bulletlist.dart';
-import 'package:notes/screens/home.dart';
+import 'package:notes/screens/homewidget.dart';
 import 'package:notes/screens/login.dart';
 import 'package:notes/screens/regiter.dart';
-import 'package:notes/screens/tasklist.dart';
-import 'package:notes/screens/widgettree.dart';
+import 'package:notes/screens/taskwidgettree.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
-import 'notescomponents/providers/notesprovider.dart';
+import 'providers/notesprovider.dart';
 import 'notescomponents/preference.dart';
 
 Future<void> main() async {
@@ -50,13 +49,13 @@ class Materialapp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        '/home': (context) => HomePage(),
+        '/home': (context) => const HomeWidgetTree(),
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),
         '/addnote': (context) => const AddNote(),
-        '/tasklist': (context) => const Tasks(),
+        '/tasklist': (context) => const TaskWidgetTree(),
         '/bulletlist': (context) => const BulletList(),
-        '/': (context) => const WidgetTree(),
+        '/': (context) => const HomeWidgetTree(),
       },
       initialRoute: '/',
     );

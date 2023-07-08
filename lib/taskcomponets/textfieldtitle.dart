@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../colors.dart';
-import 'providers/notesprovider.dart';
+import '../providers/notesprovider.dart';
 
 class Textfield extends StatelessWidget {
   const Textfield({

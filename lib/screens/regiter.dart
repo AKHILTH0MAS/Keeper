@@ -3,10 +3,10 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
-import 'package:notes/notescomponents/textfieldtitle.dart';
+import 'package:notes/taskcomponets/textfieldtitle.dart';
 import 'package:provider/provider.dart';
 import '../services/auth.dart';
-import '../notescomponents/providers/notesprovider.dart';
+import '../providers/notesprovider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

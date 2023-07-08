@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:notes/notescomponents/providers/notesprovider.dart';
-import 'package:provider/provider.dart';
+
+import '../services/db.dart';
 
 class AddNoteButton extends StatelessWidget {
   const AddNoteButton({
@@ -30,10 +30,13 @@ class AddNoteButton extends StatelessWidget {
           onPressed: () {
             if (titlecontroller.text.isNotEmpty &&
                 descriptioncontroller.text.isNotEmpty) {
-              Provider.of<NotesProvider>(context, listen: false).addnote(
+              FocusScope.of(context).unfocus();
+
+              DB().saveNote(
                 titlecontroller.text,
                 descriptioncontroller.text,
               );
+
               Navigator.pop(context);
             }
           },
@@ -84,7 +87,7 @@ class AddBulletButton extends StatelessWidget {
           onPressed: () {
             if (titlecontroller.text.isNotEmpty &&
                 descriptioncontroller1.text.isNotEmpty) {
-              Provider.of<NotesProvider>(context, listen: false).addbulletnote(
+              DB().addbulletnote(
                 titlecontroller.text,
                 descriptioncontroller1.text,
                 descriptioncontroller2.text,

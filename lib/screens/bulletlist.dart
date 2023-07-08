@@ -3,8 +3,8 @@ import 'package:notes/colors.dart';
 import 'package:provider/provider.dart';
 
 import '../notescomponents/addnotebutton.dart';
-import '../notescomponents/providers/notesprovider.dart';
-import '../notescomponents/textfieldtitle.dart';
+import '../providers/notesprovider.dart';
+import '../taskcomponets/textfieldtitle.dart';
 
 class BulletList extends StatefulWidget {
   const BulletList({super.key});

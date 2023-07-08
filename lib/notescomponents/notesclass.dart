@@ -1,10 +1,12 @@
 class Note {
   Note({
+    required this.id,
     required this.title,
     required this.description,
   });
   String title;
   String description;
+  String id;
   String call() {
     return title;
   }
@@ -16,8 +18,9 @@ class Note {
     };
   }
 
-  factory Note.fromJson(Map<String, dynamic> json) {
+  factory Note.fromJson(Map<String, dynamic> json, id) {
     return Note(
+      id: id,
       title: json["title"],
       description: json["description"],
     );

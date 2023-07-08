@@ -4,8 +4,9 @@ import 'package:provider/provider.dart';
 import '../colors.dart';
 import '../notescomponents/addnotebutton.dart';
 import '../notescomponents/descritionfield.dart';
-import '../notescomponents/providers/notesprovider.dart';
-import '../notescomponents/textfieldtitle.dart';
+import '../providers/notesprovider.dart';
+import '../taskcomponets/textfieldtitle.dart';
+import '../services/db.dart';
 
 class AddNote extends StatefulWidget {
   const AddNote({super.key});
@@ -65,8 +66,7 @@ class _AddNoteState extends State<AddNote> {
         actions: [
           IconButton(
               onPressed: () {
-                Provider.of<NotesProvider>(context, listen: false)
-                    .addnote(titlecontroller.text, descriptioncontroller.text);
+                DB().saveNote(titlecontroller.text, descriptioncontroller.text);
                 Navigator.pop(context);
               },
               icon: Icon(

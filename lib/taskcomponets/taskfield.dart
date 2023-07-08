@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
+import 'package:notes/services/db.dart';
 import 'package:provider/provider.dart';
 
-import '../notescomponents/providers/notesprovider.dart';
+import '../providers/notesprovider.dart';
 
 class Taskfield extends StatelessWidget {
   const Taskfield({
@@ -56,8 +57,9 @@ class Taskfield extends StatelessWidget {
                   padding: const MaterialStatePropertyAll(EdgeInsets.all(10))),
               onPressed: () {
                 if (titlecontroller.text.isNotEmpty) {
-                  Provider.of<NotesProvider>(context, listen: false)
-                      .addTask(titlecontroller.text);
+                  DB().saveTask(titlecontroller.text);
+                  FocusScope.of(context).unfocus();
+
                   titlecontroller.clear();
                 }
               },

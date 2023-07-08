@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
 import 'package:provider/provider.dart';
 
+import '../services/db.dart';
 import 'notesclass.dart';
-import 'providers/notesprovider.dart';
+import '../providers/notesprovider.dart';
 
 class NotesMini extends StatelessWidget {
   const NotesMini({
@@ -37,8 +38,7 @@ class NotesMini extends StatelessWidget {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Provider.of<NotesProvider>(context, listen: false)
-                        .deletenote(note);
+                    DB().deletenote(note);
                     Navigator.of(context).pop();
                   },
                   child: const Text(
