@@ -28,7 +28,7 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   final emailController = TextEditingController();
-
+  final nameController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
@@ -36,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
     final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
 
     return Scaffold(
-      backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+      backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(
@@ -59,7 +59,23 @@ class _RegisterPageState extends State<RegisterPage> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "Email",
+                  "Name",
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+                      ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Textfield(
+                  titlecontroller: nameController,
+                  keyboard: TextInputType.text,
+                  hint: "Name"),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  "Name",
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                         color: isDarkTheme ? darkTexttheme : primaryTexttheme,
                       ),
@@ -70,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               Textfield(
                   titlecontroller: emailController,
-                  keyboard: TextInputType.text,
+                  keyboard: TextInputType.emailAddress,
                   hint: "Email"),
               const SizedBox(
                 height: 20,
@@ -97,6 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   GestureDetector(
                     onTap: () {
                       createUserWIthEmailAndPassword();
+                      // addNameToDB();
                     },
                     child: Container(
                       margin: const EdgeInsets.only(right: 20),

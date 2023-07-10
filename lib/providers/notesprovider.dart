@@ -9,14 +9,8 @@ class NotesProvider extends ChangeNotifier {
 
   final sharedPreference = PreferencesManager.sharedPreferences;
   bool isDarktheme = true;
-  bool search = true;
   bool emptyNote = false;
   List<String> tasksresults = [];
-
-  void searchbool() {
-    search = !search;
-    notifyListeners();
-  }
 
   void darkTheme() {
     isDarktheme = !isDarktheme;

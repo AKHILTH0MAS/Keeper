@@ -15,7 +15,7 @@ class BottomNavigationcustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+      backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),

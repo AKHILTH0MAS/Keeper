@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
     final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
 
     return Scaffold(
-      backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+      backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(

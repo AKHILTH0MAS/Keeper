@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
 import 'package:provider/provider.dart';
 
-import '../notescomponents/addnotebutton.dart';
-import '../providers/notesprovider.dart';
-import '../taskcomponets/textfieldtitle.dart';
+import '../../notescomponents/addnotebutton.dart';
+import '../../providers/notesprovider.dart';
+import '../../taskcomponets/textfieldtitle.dart';
 
 class BulletList extends StatefulWidget {
   const BulletList({super.key});
@@ -32,9 +32,9 @@ class _BulletListState extends State<BulletList> {
     final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
 
     return Scaffold(
-      backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+      backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
       appBar: AppBar(
-        backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+        backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
         title: Text(
           "Bullet List",
           style:

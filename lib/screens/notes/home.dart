@@ -1,13 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/providers/notesprovider.dart';
+import 'package:notes/screens/notes/note_search.dart';
 import 'package:provider/provider.dart';
 
-import '../colors.dart';
-import '../notescomponents/notesclass.dart';
-import '../services/auth.dart';
-import '../notescomponents/bottomnavigation.dart';
-import '../notescomponents/notesmini.dart';
+import '../../colors.dart';
+import '../../notescomponents/notesclass.dart';
+import '../../services/auth.dart';
+import '../../notescomponents/bottomnavigation.dart';
+import '../../notescomponents/notesmini.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({super.key});
@@ -33,7 +34,6 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
-    bool search = Provider.of<NotesProvider>(context).search;
     Size size = MediaQuery.of(context).size;
     const int selectedindex = 0;
     final TextEditingController searchController = TextEditingController();
@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
 
     return notes == null
         ? Scaffold(
-            backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+            backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
             body: Center(
               child: CircularProgressIndicator(
                 color: isDarkTheme ? darkTexttheme : primaryTexttheme,
@@ -49,7 +49,71 @@ class _HomePageState extends State<HomePage> {
             ),
           )
         : Scaffold(
-            backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+            drawer: Drawer(
+              backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
+              child: ListView(
+                children: [
+                  DrawerHeader(
+                      decoration: BoxDecoration(
+                        color: isDarkTheme ? darkPrimay : primaryColor,
+                      ),
+                      child: Center(
+                        child: Text(
+                          "HI,",
+                          style: TextStyle(
+                              fontSize: 40,
+                              color: isDarkTheme
+                                  ? darkTexttheme
+                                  : primaryTexttheme),
+                        ),
+                      )),
+                  ListTile(
+                    leading: Icon(
+                      Icons.logout,
+                      color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+                    ),
+                    tileColor: isDarkTheme ? darkPrimay : primaryColor,
+                    title: Text(
+                      "Logout",
+                      style: TextStyle(
+                          color:
+                              isDarkTheme ? darkTexttheme : primaryTexttheme),
+                    ),
+                    onTap: () {
+                      Auth().signOut();
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ListTile(
+                    leading: isDarkTheme
+                        ? Icon(
+                            Icons.sunny,
+                            color:
+                                isDarkTheme ? darkTexttheme : primaryTexttheme,
+                          )
+                        : Icon(
+                            Icons.nights_stay_outlined,
+                            color:
+                                isDarkTheme ? darkTexttheme : primaryTexttheme,
+                          ),
+                    tileColor: isDarkTheme ? darkPrimay : primaryColor,
+                    title: Text(
+                      "DarkTheme",
+                      style: TextStyle(
+                          color:
+                              isDarkTheme ? darkTexttheme : primaryTexttheme),
+                    ),
+                    onTap: () {
+                      Provider.of<NotesProvider>(context, listen: false)
+                          .darkTheme();
+                    },
+                  )
+                ],
+              ),
+            ),
+            backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
             floatingActionButton: FloatingActionButton(
               backgroundColor: isDarkTheme ? darkPrimay : primaryColor,
               onPressed: () {
@@ -65,24 +129,6 @@ class _HomePageState extends State<HomePage> {
             appBar: AppBar(
               elevation: 0,
               backgroundColor: isDarkTheme ? darkPrimay : primaryColor,
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    Auth().signOut();
-                  },
-                  icon: Icon(
-                    Icons.logout,
-                    color: isDarkTheme ? darkTexttheme : primaryTexttheme,
-                  ),
-                ),
-                IconButton(
-                    onPressed: () {
-                      Provider.of<NotesProvider>(context, listen: false)
-                          .darkTheme();
-                    },
-                    icon: Icon(isDarkTheme ? Icons.sunny : Icons.dark_mode,
-                        color: isDarkTheme ? darkTexttheme : primaryTexttheme)),
-              ],
               title: Text('Notes',
                   style: TextStyle(
                       color: isDarkTheme ? darkTexttheme : primaryTexttheme)),
@@ -109,12 +155,9 @@ class _HomePageState extends State<HomePage> {
                               width: size.width * 0.68,
                               child: TextField(
                                 controller: searchController,
-                                decoration: InputDecoration(
-                                  hintText: search
-                                      ? 'Search'
-                                      : 'press enter again to go back',
-                                  hintStyle:
-                                      const TextStyle(color: Colors.black),
+                                decoration: const InputDecoration(
+                                  hintText: 'Search',
+                                  hintStyle: TextStyle(color: Colors.black),
                                   border: InputBorder.none,
                                 ),
                                 style: const TextStyle(color: Colors.black),
@@ -123,6 +166,12 @@ class _HomePageState extends State<HomePage> {
                             IconButton(
                                 onPressed: () {
                                   searchNotes(searchController.text);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => NoteSearch(
+                                              resultnotes: notesresults)));
+                                  FocusScope.of(context).unfocus();
                                 },
                                 icon: const Icon(Icons.arrow_right_alt,
                                     color: Colors.black))

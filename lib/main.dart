@@ -1,11 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:notes/screens/addnote.dart';
-import 'package:notes/screens/bulletlist.dart';
-import 'package:notes/screens/homewidget.dart';
+import 'package:notes/screens/notes/addnote.dart';
+import 'package:notes/screens/notes/bulletlist.dart';
+import 'package:notes/screens/notes/homewidget.dart';
 import 'package:notes/screens/login.dart';
 import 'package:notes/screens/regiter.dart';
-import 'package:notes/screens/taskwidgettree.dart';
+import 'package:notes/screens/Tasks/taskwidgettree.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'providers/notesprovider.dart';
@@ -29,6 +29,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        //change notifier provider for changing elements like darktheme
+        //multiprovider is not neccesary using it is a good technique
         ChangeNotifierProvider(create: (_) => NotesProvider()),
       ],
       child: const Materialapp(),

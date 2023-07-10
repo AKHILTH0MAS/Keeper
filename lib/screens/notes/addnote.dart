@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../colors.dart';
-import '../notescomponents/addnotebutton.dart';
-import '../notescomponents/descritionfield.dart';
-import '../providers/notesprovider.dart';
-import '../taskcomponets/textfieldtitle.dart';
-import '../services/db.dart';
+import '../../colors.dart';
+import '../../notescomponents/addnotebutton.dart';
+import '../../notescomponents/descritionfield.dart';
+import '../../providers/notesprovider.dart';
+import '../../taskcomponets/textfieldtitle.dart';
+import '../../services/db.dart';
 
 class AddNote extends StatefulWidget {
   const AddNote({super.key});
@@ -26,9 +26,9 @@ class _AddNoteState extends State<AddNote> {
     final emptyNote = Provider.of<NotesProvider>(context).emptyNote;
 
     return Scaffold(
-      backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+      backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
       bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+          backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -55,7 +55,7 @@ class _AddNoteState extends State<AddNote> {
             }
           }),
       appBar: AppBar(
-        backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+        backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
         centerTitle: true,
         title: Text(
           "Add Note",

@@ -16,7 +16,7 @@ class TaskCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(10),
       width: double.infinity,
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
           color: isDarkTheme ? darkPrimay : primaryColor,
           borderRadius: const BorderRadius.all(Radius.circular(20))),
@@ -26,7 +26,7 @@ class TaskCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(task.taskname,
-                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     color: isDarkTheme ? darkTexttheme : primaryTexttheme)),
             IconButton(
               onPressed: () {

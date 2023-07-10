@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:notes/screens/tasklist.dart';
+import 'package:notes/screens/Tasks/tasklist.dart';
 import 'package:provider/provider.dart';
 
-import '../services/db.dart';
+import '../../services/db.dart';
 
 class TaskWidgetTree extends StatefulWidget {
   const TaskWidgetTree({super.key});

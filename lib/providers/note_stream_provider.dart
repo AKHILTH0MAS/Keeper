@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../screens/home.dart';
+import '../screens/notes/home.dart';
 import '../services/db.dart';
 
 class HomeStreamProvider extends StatefulWidget {
@@ -15,6 +15,7 @@ class _HomeStreamProviderState extends State<HomeStreamProvider> {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
+      //using stream provider to get data form DB
       StreamProvider.value(
         value: DB().readNotes(),
         initialData: null,

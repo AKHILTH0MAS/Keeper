@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
 import 'package:notes/providers/notesprovider.dart';
-import 'package:notes/screens/search_screen.dart';
+import 'package:notes/screens/Tasks/search_screen.dart';
 import 'package:notes/taskcomponets/taskfield.dart';
 import 'package:provider/provider.dart';
 
-import '../notescomponents/bottomnavigation.dart';
-import '../taskcomponets/task.dart';
-import '../taskcomponets/taskcard.dart';
+import '../../notescomponents/bottomnavigation.dart';
+import '../../taskcomponets/task.dart';
+import '../../taskcomponets/taskcard.dart';
 
 class Taskslist extends StatefulWidget {
   const Taskslist({super.key});
@@ -37,12 +37,11 @@ class _TaskslistState extends State<Taskslist> {
       }
     }
 
-    bool search = Provider.of<NotesProvider>(context).search;
     Size size = MediaQuery.of(context).size;
     final TextEditingController searchController = TextEditingController();
     return tasks == null
         ? Scaffold(
-            backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+            backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
             body: Center(
               child: CircularProgressIndicator(
                 color: isDarkTheme ? darkTexttheme : primaryTexttheme,
@@ -50,7 +49,7 @@ class _TaskslistState extends State<Taskslist> {
             ),
           )
         : Scaffold(
-            backgroundColor: isDarkTheme ? darkThemeB : backgroundColor,
+            backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
             bottomNavigationBar: BottomNavigationcustom(
               isDarkTheme: isDarkTheme,
               selectedindex: selectedindex,
@@ -87,11 +86,9 @@ class _TaskslistState extends State<Taskslist> {
                             width: size.width * 0.68,
                             child: TextField(
                               controller: searchController,
-                              decoration: InputDecoration(
-                                hintText: search
-                                    ? 'Search'
-                                    : 'press enter again to go back',
-                                hintStyle: const TextStyle(color: Colors.black),
+                              decoration: const InputDecoration(
+                                hintText: 'Search',
+                                hintStyle: TextStyle(color: Colors.black),
                                 border: InputBorder.none,
                               ),
                               style: const TextStyle(color: Colors.black),
@@ -102,7 +99,14 @@ class _TaskslistState extends State<Taskslist> {
                                 FocusScope.of(context).unfocus();
 
                                 searchTasks(searchController.text);
-                                SearchScreen(tasksresults: tasksresults);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SearchScreenTask(
+                                      tasksresults: tasksresults,
+                                    ),
+                                  ),
+                                );
                               },
                               icon: const Icon(Icons.arrow_right_alt,
                                   color: Colors.black))
