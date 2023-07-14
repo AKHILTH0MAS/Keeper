@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
+import 'package:notes/screens/forgot_password.dart';
 import 'package:notes/services/auth.dart';
 import 'package:notes/taskcomponets/textfieldtitle.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
     final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
 
     return Scaffold(
-      backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
+      backgroundColor: isDarkTheme ? darkThemeB : primaryColor,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(
@@ -48,11 +49,13 @@ class _LoginPageState extends State<LoginPage> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.2,
               ),
-              Text(
-                "Login Now...!",
-                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                      color: isDarkTheme ? darkTexttheme : primaryTexttheme,
-                    ),
+              Center(
+                child: Text(
+                  "Login Now",
+                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                        color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+                      ),
+                ),
               ),
               const SizedBox(
                 height: 30,
@@ -61,27 +64,24 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "Enter your email",
-                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         color: isDarkTheme ? darkTexttheme : primaryTexttheme,
                       ),
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
               Textfield(
                 titlecontroller: userNameController,
-                hint: "Enter your email",
+                hint: "username@gmail.com",
                 keyboard: TextInputType.emailAddress,
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "Password",
-                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                         color: isDarkTheme ? darkTexttheme : primaryTexttheme,
                       ),
                 ),
@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                       margin: const EdgeInsets.only(right: 20),
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
-                        color: darkPrimay,
+                        color: isDarkTheme ? darkPrimay : primaryBColor,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
@@ -130,6 +130,36 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(
                 height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ForgotPassword(),
+                        )),
+                    child: Text(
+                      "Forgot Password?",
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            color:
+                                isDarkTheme ? darkTexttheme : primaryTexttheme,
+                          ),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () =>
+                        Navigator.pushReplacementNamed(context, '/register'),
+                    child: Text(
+                      "Not a user?",
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            color:
+                                isDarkTheme ? darkTexttheme : primaryTexttheme,
+                          ),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

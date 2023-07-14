@@ -55,7 +55,7 @@ class _AddNoteState extends State<AddNote> {
             }
           }),
       appBar: AppBar(
-        backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
+        backgroundColor: isDarkTheme ? darkPrimay : primaryColor,
         centerTitle: true,
         title: Text(
           "Add Note",

@@ -14,9 +14,14 @@ class TaskWidgetTree extends StatefulWidget {
 class _TaskWidgetTreeState extends State<TaskWidgetTree> {
   @override
   Widget build(BuildContext context) {
-    return StreamProvider.value(
-      value: DB().readTasks(),
-      initialData: null,
+    return MultiProvider(
+      providers: [
+        StreamProvider.value(
+          value: DB().readTasks(),
+          initialData: null,
+        ),
+        StreamProvider.value(value: DB().readUsername(), initialData: null)
+      ],
       child: const Taskslist(),
     );
   }

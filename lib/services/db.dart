@@ -7,6 +7,12 @@ import '../taskcomponets/task.dart';
 class DB {
   User? user = FirebaseAuth.instance.currentUser;
   static final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  Future<void> createUser(String username) async {
+    await _firestore.collection('Users').doc(user!.uid).set({
+      'username': username,
+    });
+  }
+
   Future<void> saveNote(String title, String description) async {
     Note note = Note(title: title, description: description, id: "");
 
@@ -24,6 +30,14 @@ class DB {
         .doc(user!.uid)
         .collection('Tasks')
         .add(task.toJson());
+  }
+
+  Stream<String> readUsername() {
+    return _firestore
+        .collection("Users")
+        .doc(user!.uid)
+        .snapshots()
+        .map((qs) => qs.data()!['username']);
   }
 
   Stream<List<Task>> readTasks() {

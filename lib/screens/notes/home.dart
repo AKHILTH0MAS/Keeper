@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:notes/providers/notesprovider.dart';
-import 'package:notes/screens/notes/note_search.dart';
+import 'package:notes/screens/notes/search_screen_notes.dart';
 import 'package:provider/provider.dart';
 
 import '../../colors.dart';
+import '../../notescomponents/drawer.dart';
 import '../../notescomponents/notesclass.dart';
 import '../../services/auth.dart';
 import '../../notescomponents/bottomnavigation.dart';
@@ -24,6 +25,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final List<Note> notesresults = [];
     final notes = Provider.of<List<Note>?>(context);
+    final username = Provider.of<String?>(context);
 
     void searchNotes(String keyword) {
       notesresults.clear();
@@ -39,7 +41,7 @@ class _HomePageState extends State<HomePage> {
     final TextEditingController searchController = TextEditingController();
     final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
 
-    return notes == null
+    return notes == null || username == null
         ? Scaffold(
             backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
             body: Center(
@@ -49,81 +51,15 @@ class _HomePageState extends State<HomePage> {
             ),
           )
         : Scaffold(
-            drawer: Drawer(
-              backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
-              child: ListView(
-                children: [
-                  DrawerHeader(
-                      decoration: BoxDecoration(
-                        color: isDarkTheme ? darkPrimay : primaryColor,
-                      ),
-                      child: Center(
-                        child: Text(
-                          "HI,",
-                          style: TextStyle(
-                              fontSize: 40,
-                              color: isDarkTheme
-                                  ? darkTexttheme
-                                  : primaryTexttheme),
-                        ),
-                      )),
-                  ListTile(
-                    leading: Icon(
-                      Icons.logout,
-                      color: isDarkTheme ? darkTexttheme : primaryTexttheme,
-                    ),
-                    tileColor: isDarkTheme ? darkPrimay : primaryColor,
-                    title: Text(
-                      "Logout",
-                      style: TextStyle(
-                          color:
-                              isDarkTheme ? darkTexttheme : primaryTexttheme),
-                    ),
-                    onTap: () {
-                      Auth().signOut();
-                    },
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  ListTile(
-                    leading: isDarkTheme
-                        ? Icon(
-                            Icons.sunny,
-                            color:
-                                isDarkTheme ? darkTexttheme : primaryTexttheme,
-                          )
-                        : Icon(
-                            Icons.nights_stay_outlined,
-                            color:
-                                isDarkTheme ? darkTexttheme : primaryTexttheme,
-                          ),
-                    tileColor: isDarkTheme ? darkPrimay : primaryColor,
-                    title: Text(
-                      "DarkTheme",
-                      style: TextStyle(
-                          color:
-                              isDarkTheme ? darkTexttheme : primaryTexttheme),
-                    ),
-                    onTap: () {
-                      Provider.of<NotesProvider>(context, listen: false)
-                          .darkTheme();
-                    },
-                  )
-                ],
-              ),
-            ),
+            drawer: HomeDrawer(isDarkTheme: isDarkTheme, username: username),
             backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
             floatingActionButton: FloatingActionButton(
-              backgroundColor: isDarkTheme ? darkPrimay : primaryColor,
-              onPressed: () {
-                Navigator.pushNamed(context, '/addnote');
-              },
-              child: const Icon(
-                Icons.add,
-                color: Colors.white,
-              ),
-            ),
+                backgroundColor: isDarkTheme ? darkPrimay : primaryColor,
+                onPressed: () {
+                  Navigator.pushNamed(context, '/addnote');
+                },
+                child: Icon(Icons.add,
+                    color: isDarkTheme ? darkTexttheme : primaryTexttheme)),
             bottomNavigationBar: BottomNavigationcustom(
                 isDarkTheme: isDarkTheme, selectedindex: selectedindex),
             appBar: AppBar(
@@ -169,8 +105,9 @@ class _HomePageState extends State<HomePage> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => NoteSearch(
-                                              resultnotes: notesresults)));
+                                          builder: (context) =>
+                                              SearchScreenNotes(
+                                                  noteresults: notesresults)));
                                   FocusScope.of(context).unfocus();
                                 },
                                 icon: const Icon(Icons.arrow_right_alt,

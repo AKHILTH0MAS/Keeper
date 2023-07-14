@@ -22,8 +22,7 @@ class TextfeildDescription extends StatelessWidget {
         horizontal: 15,
       ),
       decoration: BoxDecoration(
-        color: Colors.grey,
-        border: Border.all(),
+        color: isDarkTheme ? Colors.grey : Colors.white60,
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextField(

@@ -5,6 +5,10 @@ class Auth {
 
   User? get currentUser => firebaseAuth.currentUser;
   Stream<User?> get authStateChanges => firebaseAuth.authStateChanges();
+  static bool confirmationemailsent = false;
+  Future<void> resetPassword(String email) async {
+    await firebaseAuth.sendPasswordResetEmail(email: email);
+  }
 
   Future<void> signInWithEmailAndPassword({
     required String email,

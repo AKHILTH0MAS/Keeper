@@ -29,7 +29,6 @@ class Taskfield extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
               color: isDarkTheme ? darkPrimay : primaryColor,
-              border: Border.all(),
               borderRadius: BorderRadius.circular(20),
             ),
             child: TextField(
@@ -54,7 +53,7 @@ class Taskfield extends StatelessWidget {
                   backgroundColor: MaterialStatePropertyAll(
                     isDarkTheme ? darkPrimay : primaryColor,
                   ),
-                  padding: const MaterialStatePropertyAll(EdgeInsets.all(10))),
+                  padding: const MaterialStatePropertyAll(EdgeInsets.all(14))),
               onPressed: () {
                 if (titlecontroller.text.isNotEmpty) {
                   DB().saveTask(titlecontroller.text);

@@ -34,7 +34,7 @@ class _BulletListState extends State<BulletList> {
     return Scaffold(
       backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
       appBar: AppBar(
-        backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
+        backgroundColor: isDarkTheme ? darkPrimay : primaryColor,
         title: Text(
           "Bullet List",
           style:

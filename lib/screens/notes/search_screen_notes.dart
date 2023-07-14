@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:notes/notescomponents/notesmini.dart';
 import 'package:provider/provider.dart';
 import '../../colors.dart';
+import '../../notescomponents/notesclass.dart';
 import '../../providers/notesprovider.dart';
-import '../../taskcomponets/task.dart';
-import '../../taskcomponets/taskcard.dart';
 
-class SearchScreenTask extends StatefulWidget {
-  const SearchScreenTask({super.key, required this.tasksresults});
+class SearchScreenNotes extends StatefulWidget {
+  const SearchScreenNotes({super.key, required this.noteresults});
 
-  final List<Task> tasksresults;
+  final List<Note> noteresults;
 
   @override
-  State<SearchScreenTask> createState() => _SearchScreenTaskState();
+  State<SearchScreenNotes> createState() => _SearchScreenNotesState();
 }
 
-class _SearchScreenTaskState extends State<SearchScreenTask> {
+class _SearchScreenNotesState extends State<SearchScreenNotes> {
   @override
   Widget build(BuildContext context) {
     final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
@@ -36,7 +36,7 @@ class _SearchScreenTaskState extends State<SearchScreenTask> {
               color: isDarkTheme ? darkTexttheme : primaryTexttheme,
             )),
       ),
-      body: (widget.tasksresults.isEmpty)
+      body: (widget.noteresults.isEmpty)
           ? Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
@@ -45,7 +45,7 @@ class _SearchScreenTaskState extends State<SearchScreenTask> {
                     height: 40,
                   ),
                   Text(
-                    "NO TASKS",
+                    "NO Notes",
                     style: TextStyle(
                       color: isDarkTheme ? darkTexttheme : primaryTexttheme,
                       fontSize: 22,
@@ -60,9 +60,9 @@ class _SearchScreenTaskState extends State<SearchScreenTask> {
               ),
             )
           : ListView.builder(
-              itemCount: widget.tasksresults.length,
+              itemCount: widget.noteresults.length,
               itemBuilder: (context, index) {
-                return TaskCard(task: widget.tasksresults[index]);
+                return NotesMini(note: widget.noteresults[index]);
               },
             ),
     );

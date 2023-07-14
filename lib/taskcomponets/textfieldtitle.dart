@@ -21,11 +21,11 @@ class Textfield extends StatelessWidget {
     final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
 
     return Container(
+      height: 50,
       margin: const EdgeInsets.symmetric(horizontal: 15),
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.only(left: 20),
       decoration: BoxDecoration(
-        color: Colors.grey,
-        border: Border.all(),
+        color: isDarkTheme ? Colors.grey : Colors.white60,
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextField(

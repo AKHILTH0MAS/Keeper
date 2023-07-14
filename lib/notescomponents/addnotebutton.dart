@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:notes/colors.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/notesprovider.dart';
 import '../services/db.dart';
 
 class AddNoteButton extends StatelessWidget {
@@ -14,16 +17,17 @@ class AddNoteButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
     return Row(
       children: [
         const Spacer(),
         ElevatedButton(
           style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(
+                isDarkTheme ? darkPrimay : primaryColor),
             textStyle: MaterialStateProperty.all(
               const TextStyle(
-                color: Colors.black12,
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -40,7 +44,9 @@ class AddNoteButton extends StatelessWidget {
               Navigator.pop(context);
             }
           },
-          child: const Text('Add Note', style: TextStyle(color: Colors.black)),
+          child: Text('Add Note',
+              style: TextStyle(
+                  color: isDarkTheme ? darkTexttheme : primaryTexttheme)),
         ),
       ],
     );
@@ -71,16 +77,18 @@ class AddBulletButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
     return Row(
       children: [
         const Spacer(),
         ElevatedButton(
           style: ButtonStyle(
+            backgroundColor: isDarkTheme
+                ? MaterialStateProperty.all(darkPrimay)
+                : MaterialStateProperty.all(primaryColor),
             textStyle: MaterialStateProperty.all(
               const TextStyle(
-                color: Colors.black12,
                 fontSize: 20,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ),

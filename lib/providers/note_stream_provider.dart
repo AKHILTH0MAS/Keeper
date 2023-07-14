@@ -20,6 +20,7 @@ class _HomeStreamProviderState extends State<HomeStreamProvider> {
         value: DB().readNotes(),
         initialData: null,
       ),
+      StreamProvider.value(value: DB().readUsername(), initialData: null)
     ], child: HomePage());
   }
 }

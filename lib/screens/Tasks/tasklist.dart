@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notes/colors.dart';
+import 'package:notes/notescomponents/drawer.dart';
 import 'package:notes/providers/notesprovider.dart';
 import 'package:notes/screens/Tasks/search_screen.dart';
 import 'package:notes/taskcomponets/taskfield.dart';
@@ -23,6 +24,7 @@ class _TaskslistState extends State<Taskslist> {
   Widget build(BuildContext context) {
     int selectedindex = 1;
     final tasks = Provider.of<List<Task>?>(context);
+    final username = Provider.of<String?>(context);
     final List<Task> tasksresults = [];
     final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
     void searchTasks(String keyword) {
@@ -39,7 +41,7 @@ class _TaskslistState extends State<Taskslist> {
 
     Size size = MediaQuery.of(context).size;
     final TextEditingController searchController = TextEditingController();
-    return tasks == null
+    return tasks == null || username == null
         ? Scaffold(
             backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
             body: Center(
@@ -49,6 +51,7 @@ class _TaskslistState extends State<Taskslist> {
             ),
           )
         : Scaffold(
+            drawer: HomeDrawer(isDarkTheme: isDarkTheme, username: username),
             backgroundColor: isDarkTheme ? darkThemeB : primaryBColor,
             bottomNavigationBar: BottomNavigationcustom(
               isDarkTheme: isDarkTheme,
