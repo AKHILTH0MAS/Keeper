@@ -28,11 +28,11 @@ class BottomNavigationcustom extends StatelessWidget {
         ),
       ],
       unselectedIconTheme:
-          IconThemeData(color: isDarkTheme ? darkTexttheme : primaryTexttheme),
-      unselectedItemColor: isDarkTheme ? darkTexttheme : primaryTexttheme,
+          IconThemeData(color: isDarkTheme ? darkPrimay : primaryTexttheme),
+      unselectedItemColor: isDarkTheme ? darkPrimay : primaryTexttheme,
       selectedIconTheme:
-          IconThemeData(color: isDarkTheme ? darkPrimay : primaryColor),
-      selectedItemColor: isDarkTheme ? darkPrimay : primaryColor,
+          IconThemeData(color: isDarkTheme ? darkTexttheme : primaryColor),
+      selectedItemColor: isDarkTheme ? darkTexttheme : primaryColor,
       currentIndex: selectedindex,
       onTap: (index) {
         if (index == 0) {

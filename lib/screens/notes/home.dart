@@ -27,15 +27,6 @@ class _HomePageState extends State<HomePage> {
     final notes = Provider.of<List<Note>?>(context);
     final username = Provider.of<String?>(context);
 
-    void searchNotes(String keyword) {
-      notesresults.clear();
-      for (int index = 0; index < notes!.length; index++) {
-        if (notes[index].call().toLowerCase().contains(keyword.toLowerCase())) {
-          notesresults.add(notes[index]);
-        }
-      }
-    }
-
     Size size = MediaQuery.of(context).size;
     const int selectedindex = 0;
     final TextEditingController searchController = TextEditingController();
@@ -63,6 +54,9 @@ class _HomePageState extends State<HomePage> {
             bottomNavigationBar: BottomNavigationcustom(
                 isDarkTheme: isDarkTheme, selectedindex: selectedindex),
             appBar: AppBar(
+              iconTheme: IconThemeData(
+                color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+              ),
               elevation: 0,
               backgroundColor: isDarkTheme ? darkPrimay : primaryColor,
               title: Text('Notes',
@@ -75,47 +69,11 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        color: primaryColor,
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.search, color: Colors.black),
-                            const SizedBox(width: 10),
-                            SizedBox(
-                              width: size.width * 0.68,
-                              child: TextField(
-                                controller: searchController,
-                                decoration: const InputDecoration(
-                                  hintText: 'Search',
-                                  hintStyle: TextStyle(color: Colors.black),
-                                  border: InputBorder.none,
-                                ),
-                                style: const TextStyle(color: Colors.black),
-                              ),
-                            ),
-                            IconButton(
-                                onPressed: () {
-                                  searchNotes(searchController.text);
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SearchScreenNotes(
-                                                  noteresults: notesresults)));
-                                  FocusScope.of(context).unfocus();
-                                },
-                                icon: const Icon(Icons.arrow_right_alt,
-                                    color: Colors.black))
-                          ],
-                        ),
-                      ),
-                    ),
+                    SearchBarHome(
+                        isDarkTheme: isDarkTheme,
+                        size: size,
+                        searchController: searchController,
+                        notesresults: notesresults),
                     const SizedBox(height: 10),
                     if (notes.isEmpty)
                       Center(
@@ -152,5 +110,77 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           );
+  }
+}
+
+class SearchBarHome extends StatelessWidget {
+  const SearchBarHome({
+    super.key,
+    required this.isDarkTheme,
+    required this.size,
+    required this.searchController,
+    required this.notesresults,
+  });
+
+  final bool isDarkTheme;
+  final Size size;
+  final TextEditingController searchController;
+  final List<Note> notesresults;
+
+  @override
+  Widget build(BuildContext context) {
+    final notes = Provider.of<List<Note>?>(context);
+    void searchNotes(String keyword) {
+      notesresults.clear();
+      for (int index = 0; index < notes!.length; index++) {
+        if (notes[index].call().toLowerCase().contains(keyword.toLowerCase())) {
+          notesresults.add(notes[index]);
+        }
+      }
+    }
+
+    final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
+    return Container(
+      decoration: BoxDecoration(
+        color: isDarkTheme ? darkPrimay : primaryColor,
+        borderRadius: BorderRadius.circular(50),
+      ),
+      width: double.infinity,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Row(
+          children: [
+            Icon(Icons.search,
+                color: isDarkTheme ? darkTexttheme : primaryTexttheme),
+            const SizedBox(width: 10),
+            SizedBox(
+              width: size.width * 0.68,
+              child: TextField(
+                controller: searchController,
+                decoration: InputDecoration(
+                  hintText: 'Search',
+                  hintStyle: TextStyle(
+                      color: isDarkTheme ? darkTexttheme : primaryTexttheme),
+                  border: InputBorder.none,
+                ),
+                style: const TextStyle(color: Colors.black),
+              ),
+            ),
+            IconButton(
+                onPressed: () {
+                  searchNotes(searchController.text);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              SearchScreenNotes(noteresults: notesresults)));
+                  FocusScope.of(context).unfocus();
+                },
+                icon: Icon(Icons.arrow_right_alt,
+                    color: isDarkTheme ? darkTexttheme : primaryTexttheme))
+          ],
+        ),
+      ),
+    );
   }
 }

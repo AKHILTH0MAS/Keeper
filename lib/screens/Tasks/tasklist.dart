@@ -58,6 +58,9 @@ class _TaskslistState extends State<Taskslist> {
               selectedindex: selectedindex,
             ),
             appBar: AppBar(
+              iconTheme: IconThemeData(
+                color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+              ),
               centerTitle: true,
               elevation: 0,
               backgroundColor: isDarkTheme ? darkPrimay : primaryColor,
@@ -75,7 +78,7 @@ class _TaskslistState extends State<Taskslist> {
                   const SizedBox(height: 10),
                   Container(
                     decoration: BoxDecoration(
-                      color: primaryColor,
+                      color: isDarkTheme ? darkPrimay : primaryColor,
                       borderRadius: BorderRadius.circular(50),
                     ),
                     width: double.infinity,
@@ -83,15 +86,21 @@ class _TaskslistState extends State<Taskslist> {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Row(
                         children: [
-                          const Icon(Icons.search, color: Colors.black),
+                          Icon(Icons.search,
+                              color: isDarkTheme
+                                  ? darkTexttheme
+                                  : primaryTexttheme),
                           const SizedBox(width: 10),
                           SizedBox(
                             width: size.width * 0.68,
                             child: TextField(
                               controller: searchController,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 hintText: 'Search',
-                                hintStyle: TextStyle(color: Colors.black),
+                                hintStyle: TextStyle(
+                                    color: isDarkTheme
+                                        ? darkTexttheme
+                                        : primaryTexttheme),
                                 border: InputBorder.none,
                               ),
                               style: const TextStyle(color: Colors.black),
@@ -111,8 +120,10 @@ class _TaskslistState extends State<Taskslist> {
                                   ),
                                 );
                               },
-                              icon: const Icon(Icons.arrow_right_alt,
-                                  color: Colors.black))
+                              icon: Icon(Icons.arrow_right_alt,
+                                  color: isDarkTheme
+                                      ? darkTexttheme
+                                      : primaryTexttheme))
                         ],
                       ),
                     ),

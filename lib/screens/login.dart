@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> signInWithEmailandPassword() async {
     try {
-      Auth().signInWithEmailAndPassword(
+      await Auth().signInWithEmailAndPassword(
           email: userNameController.text, password: passwordController.text);
     } on FirebaseAuthException catch (e) {
       setState(() {
@@ -97,9 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                   const Spacer(),
                   GestureDetector(
                     onTap: () {
-                      Auth().signInWithEmailAndPassword(
-                          email: userNameController.text,
-                          password: passwordController.text);
+                      signInWithEmailandPassword();
                       Navigator.of(context).popAndPushNamed('/home');
                     },
                     child: Container(
@@ -122,12 +120,14 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                errorMessage!,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: isDarkTheme ? darkTexttheme : primaryTexttheme,
-                    ),
-              ),
+              if (errorMessage != '') ...[
+                Text(
+                  errorMessage!,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        color: isDarkTheme ? darkTexttheme : primaryTexttheme,
+                      ),
+                ),
+              ],
               const SizedBox(
                 height: 10,
               ),

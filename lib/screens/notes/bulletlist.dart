@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../../notescomponents/addnotebutton.dart';
 import '../../providers/notesprovider.dart';
 import '../../taskcomponets/textfieldtitle.dart';
+import 'bullet_discription.dart';
 
 class BulletList extends StatefulWidget {
   const BulletList({super.key});
@@ -82,37 +83,6 @@ class _BulletListState extends State<BulletList> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class BulletDiscription extends StatelessWidget {
-  const BulletDiscription({
-    super.key,
-    required this.descriptioncontroller,
-  });
-
-  final TextEditingController descriptioncontroller;
-
-  @override
-  Widget build(BuildContext context) {
-    final isDarkTheme = Provider.of<NotesProvider>(context).isDarktheme;
-
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15),
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        style: TextStyle(
-          color: isDarkTheme ? darkTexttheme : primaryTexttheme,
-        ),
-        controller: descriptioncontroller,
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: "• - Your point...",
-          hintStyle:
-              TextStyle(color: isDarkTheme ? darkTexttheme : primaryTexttheme),
         ),
       ),
     );
