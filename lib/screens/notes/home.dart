@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                     if (notes.isEmpty)
                       Center(
                         child: Text(
-                          'No Notes',
+                          'NO NOTES',
                           style: TextStyle(
                             color:
                                 isDarkTheme ? darkTexttheme : primaryTexttheme,
