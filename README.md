@@ -1,16 +1,26 @@
-# notes
 
-A new Flutter project.
+## NotesKeep  - Flutter Note Taking App (with Firebase)
 
-## Getting Started
+This is a mobile application built with Flutter for managing notes and tasks. It uses Firebase as the backend for data storage and authentication.
 
-This project is a starting point for a Flutter application.
+### Features:
 
-A few resources to get you started if this is your first Flutter project:
+-   Create, save, and edit notes with bullet points.
+-   Add tasks with reminders.
+-   User authentication with Firebase Auth.
+-   Data persistence with Firebase Cloud Firestore.
+-   Local storage management with Shared Preferences.
+-   State management with Provider package.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Technologies Used:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+-   Flutter - Cross-platform mobile app development framework.
+-   Firebase - Backend services for authentication, database, and more.
+-   Firebase Auth - User authentication for the app.
+-   Firebase Cloud Firestore - Cloud storage for notes and tasks.
+-   Shared Preferences - Local storage of user preferences.
+-   Provider - State management for the app.
+### Additional Notes
+
+-   This is a personal project built for learning purposes.
+-   Feel free to explore the code and customize it further.
